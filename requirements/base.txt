@@ -23,3 +23,7 @@ djangorestframework==3.11.1  # https://github.com/encode/django-rest-framework
 django-cors-headers==3.4.0 # https://github.com/adamchainz/django-cors-headers
 drf-yasg #https://drf-yasg.readthedocs.io/en/stable/readme.html#installation
 djangorestframework-jwt #https://jpadilla.github.io/django-rest-framework-jwt/
+# Filter
+django-filter
+django-url-filter # http://django-url-filter.readthedocs.io/
+

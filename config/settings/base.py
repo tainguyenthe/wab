@@ -74,6 +74,8 @@ THIRD_PARTY_APPS = [
     "rest_framework.authtoken",
     "corsheaders",
     "drf_yasg",
+    "django_filters",
+
 ]
 
 LOCAL_APPS = [
@@ -297,9 +299,9 @@ ACCOUNT_EMAIL_REQUIRED = True
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_ADAPTER = "wab.cores.users.adapters.AccountAdapter"
+ACCOUNT_ADAPTER = "wab.utils.adapters.AccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-SOCIALACCOUNT_ADAPTER = "wab.cores.users.adapters.SocialAccountAdapter"
+SOCIALACCOUNT_ADAPTER = "wab.utils.adapters.SocialAccountAdapter"
 
 # django-rest-framework
 # -------------------------------------------------------------------------------
@@ -311,6 +313,9 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.TokenAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_FILTER_BACKENDS": [
+        "url_filter.integrations.drf.DjangoFilterBackend",
+    ]
 }
 # django-rest-framework-jwt
 # https://jpadilla.github.io/django-rest-framework-jwt/

@@ -10,9 +10,9 @@ router = SimpleRouter()
 router.register("v1", UserViewSet)
 
 urlpatterns = [
-    path('api/', include(router.urls)),
-    path("~redirect/", view=user_redirect_view, name="redirect"),
-    path("~update/", view=user_update_view, name="update"),
-    path("<str:username>/", view=user_detail_view, name="detail"),
+    # path('api/', include(router.urls)),
+    # path("~redirect/", view=user_redirect_view, name="redirect"),
+    # path("~update/", view=user_update_view, name="update"),
+    # path("<str:username>/", view=user_detail_view, name="detail"),
 
 ]
