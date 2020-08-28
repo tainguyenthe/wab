@@ -1,13 +1,10 @@
 from django.apps import apps
 from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from wab.cores.components.variables import (
-    EXCLUDE_APPS,
-    PROTECTED_APPS,
-    PROTECTED_FIELDS,
-)
+from wab.cores.components.variables import PROTECTED_APPS, PROTECTED_FIELDS
 
 
 @api_view(['GET'])
@@ -38,5 +35,5 @@ def fields_view(request, app_label, model):
                 } for _field in fields if not _field.name in PROTECTED_FIELDS
             ]
         )
-    except Exception:
+    except ObjectDoesNotExist:
         return Response({})

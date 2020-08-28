@@ -11,9 +11,12 @@ class DynamicFieldsModelSerializer(ModelSerializer):
         # Instantiate the superclass normally
         super(DynamicFieldsModelSerializer, self).__init__(*args, **kwargs)
 
-        exclude_fields = ["user_permissions", "password"]
-        for field_name in exclude_fields:
-            self.fields.pop(field_name)
+        try:
+            exclude_fields = ["user_permissions", "password"]
+            for field_name in exclude_fields:
+                self.fields.pop(field_name)
+        except Exception:
+            pass
         fields = self.context['request'].query_params.get('fields')
         if fields:
             fields = fields.split(',')

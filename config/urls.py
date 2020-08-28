@@ -47,6 +47,8 @@ urlpatterns += [
     # path("api/", include(apipatterns)),
 
     path("applications/", include("wab.cores.applications.urls", namespace="applications")),
+    path("groups/", include("wab.cores.groups.urls", namespace="groups")),
+    path("permissions/", include("wab.cores.permissions.urls", namespace="permissions")),
     path("users/", include("wab.cores.users.urls", namespace="users")),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
