@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=wabdb
+POSTGRES_USER=wabdbuser
+POSTGRES_PASSWORD=wabdbpassword
