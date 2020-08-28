@@ -15,18 +15,6 @@ from rest_framework_jwt.views import (
     verify_jwt_token,
 )
 
-urlpatterns = [
-    # Django Admin, use {% url 'admin:index' %}
-    path(settings.ADMIN_URL, admin.site.urls),
-    # User management
-    path("accounts/", include("allauth.urls")),
-    # Your stuff: custom urls includes go here
-    path("users/", include("wab.cores.users.urls", namespace="users")),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-if settings.DEBUG:
-    # Static file serving when using Gunicorn + Uvicorn for local web socket development
-    urlpatterns += staticfiles_urlpatterns()
-
 # API URLS
 schema_view = get_schema_view(
     openapi.Info(
@@ -36,16 +24,35 @@ schema_view = get_schema_view(
     public=True,
     permission_classes=(permissions.IsAdminUser,),
 )
-urlpatterns += [
+# apipatterns = [
+#     path("users/", include("wab.cores.users.urls", namespace="users")),
+# ]
+urlpatterns = [
     path('swagger/', login_required(schema_view.with_ui('swagger', cache_timeout=0)), name='schema-swagger-ui'),
     path('redoc/', login_required(schema_view.with_ui('redoc', cache_timeout=0)), name='schema-redoc'),
     # DRF auth token
-    path("auth-token/", obtain_auth_token),
+    # path("auth-token/", obtain_auth_token),
     path("jwt/jwt-token-auth/", obtain_jwt_token),
     path("jwt/jwt-token-refresh/", refresh_jwt_token),
     path("jwt/jwt-token-verify/", verify_jwt_token),
 
 ]
+
+urlpatterns += [
+    # Django Admin, use {% url 'admin:index' %}
+    # path(settings.ADMIN_URL, admin.site.urls),
+    # User management
+    path("accounts/", include("allauth.urls")),
+    # Your stuff: custom urls includes go here
+    # path("api/", include(apipatterns)),
+
+    path("applications/", include("wab.cores.applications.urls", namespace="applications")),
+    path("users/", include("wab.cores.users.urls", namespace="users")),
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    # Static file serving when using Gunicorn + Uvicorn for local web socket development
+    urlpatterns += staticfiles_urlpatterns()
 
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit

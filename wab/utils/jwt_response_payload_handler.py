@@ -1,5 +1,5 @@
 # Custom payload when using jwt get token
-from wab.cores.users.api.serializers import UserSerializer
+from wab.cores.users.serializers import UserSerializer
 
 
 def jwt_response_payload_handler(token, user=None, request=None):
