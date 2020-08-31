@@ -68,7 +68,7 @@ THIRD_PARTY_APPS = [
     "crispy_forms",
     "allauth",
     "allauth.account",
-    # "allauth.socialaccount",
+    "allauth.socialaccount",
     "django_celery_beat",
     "rest_framework",
     "rest_framework.authtoken",
@@ -85,13 +85,27 @@ LOCAL_APPS = [
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
-PLUGINS_DIR = str(APPS_DIR / "plugins")
-for item in os.listdir(PLUGINS_DIR):
-    if os.path.isdir(os.path.join(PLUGINS_DIR, item)):
-        plugin_name = F"wab.plugins.{item}"
+# Scan Premium apps
+PRE_PLUGINS_DIR = str(APPS_DIR / "premiums")
+pre_list = []
+for item in os.listdir(PRE_PLUGINS_DIR):
+    pre_list.append(item)
+    if os.path.isdir(os.path.join(PRE_PLUGINS_DIR, item)) and item != '.git':
+        plugin_name = F"wab.premiums.{item}"
 
         if plugin_name not in INSTALLED_APPS:
             INSTALLED_APPS.append(F"{plugin_name}")
+
+# Scan plugin apps
+PLUGINS_DIR = str(APPS_DIR / "plugins")
+for item in os.listdir(PLUGINS_DIR):
+    if item not in pre_list:
+        if os.path.isdir(os.path.join(PLUGINS_DIR, item)) and item != '.git':
+            plugin_name = F"wab.plugins.{item}"
+
+            if plugin_name not in INSTALLED_APPS:
+                INSTALLED_APPS.append(F"{plugin_name}")
+
 
 # MIGRATIONS
 # ------------------------------------------------------------------------------

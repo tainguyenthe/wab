@@ -276,3 +276,4 @@ wab/media/
 .ipython/
 .env
 .envs/*
+wab/premiums/*

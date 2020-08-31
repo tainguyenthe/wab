@@ -1,7 +1,7 @@
 import pytest
 from django.test import RequestFactory
 
-from wab.cores.users.api.views import UserViewSet
+from wab.cores.users.views import UserViewSet
 from wab.cores.users.models import User
 
 pytestmark = pytest.mark.django_db
@@ -19,7 +19,7 @@ class TestUserViewSet:
 
     def test_me(self, user: User, rf: RequestFactory):
         view = UserViewSet()
-        request = rf.get("/fake-url/")
+        request = rf.get("/fake-url/?fields=username,email,name")
         request.user = user
 
         view.request = request
@@ -30,5 +30,4 @@ class TestUserViewSet:
             "username": user.username,
             "email": user.email,
             "name": user.name,
-            "url": f"http://testserver/users/api/v1/{user.username}/",
         }

@@ -27,3 +27,6 @@ djangorestframework-jwt #https://jpadilla.github.io/django-rest-framework-jwt/
 django-filter
 django-url-filter # http://django-url-filter.readthedocs.io/
 
+# Facebook
+facebook_business
+facebookads
